@@ -2,15 +2,15 @@
 
     var listaProdutos = [];
     var listaServicos = [];
-
+    
     // salva produtos
     function salvarProdutos(){
         var produto = {};
 
         produto.nome = $("#nome-produto").val();
         produto.quantidade = $("#qtd-produto").val();
-        produto.valor_unitario = $("#valor-unitario").val();
-        produto.valor_total = $("#valor-total").val();
+        produto.valorUnitario = $("#valor-unitario").val();
+        produto.valorTotal = $("#valor-total").val();
 
         let id = $("#id-produto").val();
 
@@ -24,8 +24,8 @@
             if(produtoExistente){
                 produtoExistente.nome = produto.nome;
                 produtoExistente.quantidade = produto.quantidade;
-                produtoExistente.valor_unitario = produto.valor_unitario;
-                produtoExistente.valor_total = produto.valor_total;
+                produtoExistente.valor_unitario = produto.valorUnitario;
+                produtoExistente.valor_total = produto.valorTotal;
             }
         }
 
@@ -57,7 +57,6 @@
 
             }
         }
-
         renderizaServico();
         limparServico();
 
@@ -89,8 +88,8 @@
 
             let tdNome = $('<td>').text(produto.nome);
             let tdQuantidade = $('<td>').text(produto.quantidade);
-            let tdValor = $('<td>').text(produto.valor_unitario);
-            let tdValorTotal = $('<td>').text(produto.valor_total).addClass("valor");
+            let tdValor = $('<td>').text(produto.valorUnitario);
+            let tdValorTotal = $('<td>').text(produto.valorTotal).addClass("valor");
 
             let tdOpcoes = $('<td>');
 
@@ -163,8 +162,8 @@
          if(produto){
              $("#nome-produto").val(produto.nome);
              $("#qtd-produto").val(produto.quantidade);
-             $("#valor-unitario").val(produto.valor_unitario);
-             $("#valor-total").val(produto.valor_total);
+             $("#valor-unitario").val(produto.valorUnitario);
+             $("#valor-total").val(produto.valorTotal);
              $("#id-produto").val(produto.id);
          }else{
              alert('Não foi possível encontrar o servico');
@@ -179,7 +178,7 @@
                  return value.id != id;
              });
 
-         renderizaProduto();
+        renderizaProduto();
         calculaTotais();
         }
 
@@ -201,7 +200,6 @@
             .filter(function(value){
                 return value.id != id;
             });
-
         renderizaServico();
         calculaTotaisServico();
     }
@@ -338,5 +336,31 @@
         $("#ttServico").text(totalServico);
         $("#ttGeral").text(totalProduto + totalServico);
     }
+
+////////////////////////////////////////////////////////////////////////////////////
+
+    function salvarOrcamento(){
+        const orcamento = {};
+        orcamento.cliente = $("#nome-cliente").val();
+        orcamento.cpf = $("#cpf-cliente").val();
+        orcamento.totalProdutos = parseFloat($("#ttProduto").text());
+        orcamento.totalServicos = parseFloat($("#ttServico").text());
+        orcamento.totalGeral = parseFloat($("#ttGeral").text());
+        orcamento.produtos = listaProdutos;
+        orcamento.servicos = listaServicos;
+        $.ajax({
+            url: 'http://172.18.24.130:3000/orcamento',
+            dataType: 'json',
+            type: 'post',
+            contentType: 'application/json',
+            data: JSON.stringify(orcamento),
+            processData: false,
+        });
+    }
+
+    $("#envia").click(function(){
+        salvarOrcamento();
+    });
+
 
 })();
