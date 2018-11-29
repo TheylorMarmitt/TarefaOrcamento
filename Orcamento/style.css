@@ -1,37 +1,13 @@
-
-#tabelaFuncionario #tabelaCidade #tabelaProfissao table, th, td {
+.tabelaProduto table, th, td {
     border: 1px solid black;
 }
-
-#tabelaFuncionario #tabelaCidade #tabelaProfissao{
+.tabelaProduto{
     width: 700px;
 
 }
 
-nav{
-    height: 600px;
-    width: 200px;
-    float: left;
-    background-color: #eee;
-    margin-right: 20px;
-}
 
-nav ul li{
-    display: inline;
-    padding: 15px 10px;
-    color: #fff;
-
-}
-
-<<<<<<< HEAD
-nav ul li button{
-    height: 40px;
-    width: 100px;
-    margin-top: 30px;
-}
-=======
 input{
     width: 150px;
     margin-bottom: 5px;
-} 
->>>>>>> temp
+}

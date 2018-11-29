@@ -1,172 +1,102 @@
-
 (function() {
 
-<<<<<<< HEAD
-    var listaFuncionarios = [];
-    var listaCidades = [];
-    var listaProfissoes = [];
-
-    // salva funcionario
-    function salvarFuncionario(){
-        var funcionario = {};
-
-        funcionario.nome = $("#nome-funcionario").val();
-        funcionario.cpf = $("#cpf-funcionario").val();
-        funcionario.nascimento = $("#data-funcionario").val();
-        funcionario.cidade = $("#cidade-funcionario").val();
-        funcionario.salario = $("#salario-funcionario").val();
-=======
     var listaProdutos = [];
     var listaServicos = [];
- 
+    
     // salva produtos
     function salvarProdutos(){
         var produto = {};
 
         produto.nome = $("#nome-produto").val();
         produto.quantidade = $("#qtd-produto").val();
-        produto.valor_unitario = $("#valor-unitario").val();
-        produto.valor_total = $("#valor-total").val();
->>>>>>> temp
+        produto.valorUnitario = $("#valor-unitario").val();
+        produto.valorTotal = $("#valor-total").val();
 
-        let id = $("#id-funcionario").val();
+        let id = $("#id-produto").val();
 
         if(id == undefined || id == ''){
-            funcionario.id = new Date().getTime();
-            listaFuncionarios.push(funcionario);
+            produto.id = new Date().getTime();
+            listaProdutos.push(produto);
         } else {
             let idNumber = parseInt(id);
-<<<<<<< HEAD
-            let funcionarioExistente = findFuncionarioById(idNumber);
-
-            if(funcionarioExistente){
-                funcionarioExistente.nome = funcionario.nome;
-                funcionarioExistente.cpf = funcionario.cpf;
-                funcionarioExistente.nascimento = funcionario.nascimento;
-                funcionarioExistente.cidade = funcionario.cidade;
-                funcionarioExistente.salario = funcionario.salario;
-=======
             let produtoExistente = findProdutoById(idNumber);
 
             if(produtoExistente){
                 produtoExistente.nome = produto.nome;
                 produtoExistente.quantidade = produto.quantidade;
-                produtoExistente.valor_unitario = produto.valor_unitario;
-                produtoExistente.valor_total = produto.valor_total;
->>>>>>> temp
+                produtoExistente.valor_unitario = produto.valorUnitario;
+                produtoExistente.valor_total = produto.valorTotal;
             }
         }
-        gravaNoLocalStorageFuncionario()
-        renderizaFuncionario();
+
+        renderizaProduto();
+
+         limpar();
+
+         calculaTotais();
         return false;
     }
-    // salva cidade
-    function salvarCidade(){
-        var cidade = {};
+    // salva servicos
+    function salvarServicos(){
+        var servico = {};
 
-        cidade.nome = $("#nome-cidade").val();
-        cidade.estado = $("#estado").val();
-        let id = $("#id-cidade").val();
+        servico.descricao = $("#descricao-servico").val();
+        servico.valor = $("#valor-servico").val();
+        let id = $("#id-servico").val();
 
         if(id == undefined || id == ''){
-            cidade.id = new Date().getTime();
-            listaCidades.push(cidade);
+            servico.id = new Date().getTime();
+            listaServicos.push(servico);
         } else {
             let idNumber = parseInt(id);
-            let cidadeExistente = findCidadeById(idNumber);
+            let servicoExistente = findServicoById(idNumber);
 
-            if(cidadeExistente){
-                cidadeExistente.nome = cidade.nome;
-                cidadeExistente.estado = cidade.estado;
+            if(servicoExistente){
+                servicoExistente.descricao = servico.descricao;
+                servicoExistente.valor = servico.valor;
 
             }
         }
-        gravaNoLocalStorageCidade()
-        renderizaCidade();
-        return false;
-    }
-
-    // salva profissao
-    function salvarProfissao(){
-        var profissao = {};
-
-        profissao.funcao = $("#funcao").val();
-        profissao.area = $("#area").val();
-        profissao.salario = $("#salario").val();
-        let id = $("#id-profissao").val();
-
-        if(id == undefined || id == ''){
-            profissao.id = new Date().getTime();
-            listaProfissoes.push(profissao);
-        } else {
-            let idNumber = parseInt(id);
-            let profissaoExistente = findProfissaoById(idNumber);
-
-            if(cidadeExistente){
-                profissaoExistente.funcao = profissao.funcao;
-                profissaoExistente.area = profissao.area;
-                profissaoExistente.salario = profissao.salario;
-
-            }
-        }
-<<<<<<< HEAD
-        gravaNoLocalStorageProfissao()
-        renderizaProfissao();
-=======
-
         renderizaServico();
         limparServico();
 
         calculaTotaisServico();
->>>>>>> temp
         return false;
     }
 
-    // limpa funcionario
-    function limparFuncionario(){
-        $("#formulario-funcionario input").val('');
-    }
-    // limpa cidade
-    function limparCidade(){
-        $("#formulario-cidade input").val('');
-    }
-    // limpa profissao
-    function limparProfissao(){
-        $("#formulario-profissao input").val('');
+    // limpa produtos
+    function limpar(){
+        $("#formulario-produto input").val('');
     }
 
-    // renderiza Funcionario
-    function renderizaFuncionario(){
-        const tbody = $("#corpo-funcionario");
+    // limpa servicos
+    function limparServico(){
+        $("#formulario-servicos input").val('');
+    }
+
+    // renderiza produto
+    function renderizaProduto(){
+        const tbody = $("#corpo-produto");
 
         tbody.html('');
 
-        for(let i=0; i<listaFuncionarios.length; i++){
+        for(let i=0; i<listaProdutos.length; i++){
 
-            const funcionario = listaFuncionarios[i];
+            const produto = listaProdutos[i];
 
             let tr = $('<tr>');
 
-<<<<<<< HEAD
-            let tdNome = $('<td>').text(funcionario.nome);
-            let tdCpf = $('<td>').text(funcionario.cpf);
-            let tdNascimento = $('<td>').text(funcionario.nascimento);
-            let tdCidade = $('<td>').text(funcionario.cidade);
-            let tdSalario = $('<td>').text(funcionario.salario);
-=======
             let tdNome = $('<td>').text(produto.nome);
             let tdQuantidade = $('<td>').text(produto.quantidade);
-            let tdValor = $('<td>').text(produto.valor_unitario);
-            let tdValorTotal = $('<td>').text(produto.valor_total).addClass("valor");
->>>>>>> temp
+            let tdValor = $('<td>').text(produto.valorUnitario);
+            let tdValorTotal = $('<td>').text(produto.valorTotal).addClass("valor");
 
             let tdOpcoes = $('<td>');
 
             tr.append(tdNome)
-                .append(tdCpf)
-                .append(tdNascimento)
-                .append(tdCidade)
-                .append(tdSalario)
+                .append(tdQuantidade)
+                .append(tdValor)
+                .append(tdValorTotal)
                 .append(tdOpcoes);
 
             let btnEditar = $('<button>').text('Editar');
@@ -174,11 +104,11 @@
             let btnExcluir = $('<button>').text('Excluir');
 
             btnEditar.click(function(){
-                editarFuncionario(produto.id);
+                editarProduto(produto.id);
             });
 
             const fn_exc = function(){
-                excluirFuncionario(produto.id);
+                excluirProduto(produto.id);
             };
             btnExcluir.click(fn_exc);
 
@@ -187,24 +117,24 @@
         }
     }
 
-    // renderiza Cidade
-    function renderizaCidade(){
-        const tbody = $("#corpo-cidade");
+    // renderiza servico
+    function renderizaServico(){
+        const tbody = $("#corpo-tabela-servicos");
 
         tbody.html('');
 
-        for(let i=0; i<listaCidades.length; i++){
+        for(let i=0; i<listaServicos.length; i++){
 
-            const cidade = listaCidades[i];
+            const servico = listaServicos[i];
 
             let tr = $('<tr>');
 
-            let tdNome = $('<td>').text(cidade.nome);
-            let tdEstado = $('<td>').text(cidade.estado);
+            let tdDescricao = $('<td>').text(servico.descricao);
+            let tdValor = $('<td>').text(servico.valor).addClass("valorServico");
             let tdOpcoes = $('<td>');
 
-            tr.append(tdNome)
-                .append(tdEstado)
+            tr.append(tdDescricao)
+                .append(tdValor)
                 .append(tdOpcoes);
 
             let btnEditar = $('<button>').text('Editar');
@@ -212,102 +142,43 @@
             let btnExcluir = $('<button>').text('Excluir');
 
             btnEditar.click(function(){
-                editarCidade(cidade.id);
+                editarServico(servico.id);
             });
 
-            btnExcluir.click(function(){
-                excluirCidade(cidade.id);
-            });
-
-            tdOpcoes.append(btnEditar).append(btnExcluir);
-            tbody.append(tr);
-        }
-    }
-    // renderiza profissao
-    function renderizaProfissao(){
-        const tbody = $("#corpo-profissao");
-
-        tbody.html('');
-
-        for(let i=0; i<listaProfissoes.length; i++){
-
-            const profissao = listaProfissoes[i];
-
-<<<<<<< HEAD
-            let tr = $('<tr>');
-
-            let tdFuncao = $('<td>').text(profissao.funcao);
-            let tdArea = $('<td>').text(profissao.area);
-            let tdSalario = $('<td>').text(profissao.salario);
-            let tdOpcoes = $('<td>');
-
-            tr.append(tdFuncao)
-                .append(tdArea)
-                .append(tdSalario)
-                .append(tdOpcoes);
-
-            let btnEditar = $('<button>').text('Editar');
-
-            let btnExcluir = $('<button>').text('Excluir');
-
-            btnEditar.click(function(){
-                editarProfissao(profissao.id);
-            });
-
-            btnExcluir.click(function(){
-                excluirProfissao(profissao.id);
-            });
+            const fn_exc = function(){
+                excluirServico(servico.id);
+            };
+            btnExcluir.click(fn_exc);
 
             tdOpcoes.append(btnEditar).append(btnExcluir);
             tbody.append(tr);
         }
     }
 
-    // edita funcionario
-    function editarFuncionario(id){
-        let funcionario = findFuncionarioById(id);
+    // edita prod
+    function editarProduto(id){
+        let produto = findProdutoById(id);
 
-         if(funcionario){
-             $("#nome-funcionario").val(funcionario.nome);
-             $("#cpf-funcionario").val(funcionario.cpf);
-             $("#data-funcionario").val(funcionario.data);
-             $("#cidade-funcionario").val(funcionario.cidade);
-             $("#salario-funcionario").val(funcionario.salario);
-             $("#id-produto").val(funcionario.id);
-=======
          if(produto){
              $("#nome-produto").val(produto.nome);
              $("#qtd-produto").val(produto.quantidade);
-             $("#valor-unitario").val(produto.valor_unitario);
-             $("#valor-total").val(produto.valor_total);
+             $("#valor-unitario").val(produto.valorUnitario);
+             $("#valor-total").val(produto.valorTotal);
              $("#id-produto").val(produto.id);
->>>>>>> temp
          }else{
-             alert('Não foi possível encontrar o funcionario');
+             alert('Não foi possível encontrar o servico');
          }
+         calculaTotais();
      }
 
-     // exclui funcionario
-     function excluirFuncionario(id){
-         listaFuncionarios = listaFuncionarios
+     // exclui prod
+     function excluirProduto(id){
+         listaProdutos = listaProdutos
              .filter(function(value){
                  return value.id != id;
              });
-<<<<<<< HEAD
-        gravaNoLocalStorageFuncionario()
-        renderizaFuncionario();
-    }
-    // edita cidade
-    function editarCidade(id){
-        let cidade = findCidadeById(id);
 
-         if(cidade){
-             $("#nome-cidade").val(cidade.nome);
-             $("#estado").val(cidade.estado);
-             $("#id-cidade").val(cidade.id);
-=======
-
-         renderizaProduto();
+        renderizaProduto();
         calculaTotais();
         }
 
@@ -318,106 +189,59 @@
              $("#descricao-servico").val(servico.descricao);
              $("#valor-servico").val(servico.valor);
              $("#id-servico").val(servico.id);
->>>>>>> temp
          }else{
-             alert('Não foi possível encontrar a cidade');
+             alert('Não foi possível encontrar o servico');
          }
+         calculaTotaisServico();
      }
 
-     // exclui cidade
-     function excluirCidade(id){
-        listaCidades = listaCidades
+     function excluirServico(id){
+        listaServicos = listaServicos
             .filter(function(value){
                 return value.id != id;
             });
-<<<<<<< HEAD
-        gravaNoLocalStorageCidade()
-        renderizaCidade();
-    }
-
-    // edita Profissao
-    function editarProfissao(id){
-        let profissao = findProfissaoById(id);
-        if(profissao){
-            $("#funcao").val(profissao.funcao);
-            $("#area").val(profissao.area);
-            $("#salario").val(profissao.salario);
-            $("#id-cidade").val(profissao.id);
-        }else{
-            alert('Não foi possível encontrar a profissao');
-        }
-    }
-    // exclui profissao
-    function excluirProfissao(id){
-    listaProfissoes = listaProfissoes
-        .filter(function(value){
-            return value.id != id;
-        });
-        gravaNoLocalStorageProfissao()
-        renderizaProfissao();
-=======
-
         renderizaServico();
         calculaTotaisServico();
->>>>>>> temp
     }
 
-     function findFuncionarioById(id){
-        let funcionarios = listaFuncionarios
+     function findProdutoById(id){
+        let produtos = listaProdutos
             .filter(function(value){
                 return value.id == id;
             });
 
-        if(funcionarios.length == 0){
+        if(produtos.length == 0){
             return undefined;
         }else{
-            return funcionarios[0];
+            return produtos[0];
         }
 
     }
 
-    function findCidadeById(id){
-        let cidades = listaCidades
+    function findServicoById(id){
+        let servicos = listaServicos
             .filter(function(value){
                 return value.id == id;
             });
 
-        if(cidades.length == 0){
+        if(servicos.length == 0){
             return undefined;
         }else{
-            return cidades[0];
+            return servicos[0];
         }
 
     }
 
-    function findProfissaoById(id){
-        let profissoes = listaProfissoes
-            .filter(function(value){
-                return value.id == id;
-            });
+    renderizaProduto();
+    renderizaServico();
 
-        if(profissoes.length == 0){
-            return undefined;
-        }else{
-            return profissoes[0];
-        }
-
-    }
-
-    buscaDoLocalStorageFuncionario();
-    renderizaFuncionario();
-    buscaDoLocalStorageCidade();
-    renderizaCidade();
-    buscaDoLocalStorageProfissao();
-    renderizaProfissao();
-
-    $("#formulario-funcionario").on("submit", function(evt){
-        salvarFuncionario();
+    $("#formulario-produto").on("submit", function(evt){
+        salvarProdutos();
         evt.stopPropagation();
         evt.preventDefault();
     });
 
-    $('#formulario-funcionario input').each(function(index, element){
+    $('#formulario-produto input').each(function(index, element){
         element.oninvalid = function(){
             const msg = $(this).data('custom-message');
             if(msg){
@@ -429,13 +253,13 @@
         }
     });
 
-    $("#formulario-cidade").on("submit", function(evt){
-        salvarCidade();
+    $("#formulario-servicos").on("submit", function(evt){
+        salvarServicos();
         evt.stopPropagation();
         evt.preventDefault();
     });
 
-    $('#formulario-cidade input').each(function(index, element){
+    $('#formulario-servicos input').each(function(index, element){
         element.oninvalid = function(){
             const msg = $(this).data('custom-message');
             if(msg){
@@ -447,74 +271,96 @@
         }
     });
 
-    $("#formulario-profissao").on("submit", function(evt){
-        salvarProfissao();
-        evt.stopPropagation();
-        evt.preventDefault();
-    });
+    // função de atualizar total produto
 
-    $('#formulario-profissao input').each(function(index, element){
-        element.oninvalid = function(){
-            const msg = $(this).data('custom-message');
-            if(msg){
-                this.setCustomValidity("");
-                if (!this.validity.valid) {
-                    this.setCustomValidity(msg);
-                }
-            }
+    $("#qtd-produto, #valor-unitario").keyup(fazerConta);
+
+    function fazerConta() {
+        var num1 = ($("#qtd-produto").val());
+        var num2 = ($("#valor-unitario").val());
+
+        if (num1 == '') {
+            num1 = 0;
         }
+        if (num2 == '') {
+            num2 = 0;
+        }
+
+        var total = (num1 * num2);
+        $("#valor-total").val(total);
+    }
+
+    ////////
+
+    // calcula totais
+
+
+    var table = $('#tabelaProduto');
+    var indice = 3;
+    table.find('tr').each(function(indice){
+        $(this).find('td').each(function(indice){
+
+        });
     });
 
-    /// funcionario
-    function gravaNoLocalStorageFuncionario(){
-        const listaEmJSON = JSON.stringify(listaFuncionarios);
-        localStorage.setItem("lista", listaEmJSON);
+    function calculaTotais(){
+        var total = 0;
+        $("#tabelaProduto .valor").each(function(){
+            total += parseFloat($(this).text());
+
+        })
+        $("#totais").text(total);
+        setTotalGeral();
+    };
+
+     function calculaTotaisServico(){
+        var total = 0;
+        $("#tabelaServico .valorServico").each(function(){
+            total += parseFloat($(this).text());
+
+        })
+        $("#totalServico").text(total);
+        setTotalGeral();
+    };
+
+    function setTotalGeral(){
+        var totalProduto = parseFloat($("#totais").text());
+        var totalServico = parseFloat($("#totalServico").text());
+        if(!$.isNumeric(totalProduto)){
+            totalProduto = 0;
+        }
+        if(!$.isNumeric(totalServico)){
+            totalServico = 0;
+        }
+        $("#ttProduto").text(totalProduto);
+        $("#ttServico").text(totalServico);
+        $("#ttGeral").text(totalProduto + totalServico);
     }
 
-    function buscaDoLocalStorageFuncionario(){
-        const listaStorage = localStorage.getItem("lista");
-        listaFuncionarios = JSON.parse(listaStorage) || [];
+////////////////////////////////////////////////////////////////////////////////////
+
+    function salvarOrcamento(){
+        const orcamento = {};
+        orcamento.cliente = $("#nome-cliente").val();
+        orcamento.cpf = $("#cpf-cliente").val();
+        orcamento.totalProdutos = parseFloat($("#ttProduto").text());
+        orcamento.totalServicos = parseFloat($("#ttServico").text());
+        orcamento.totalGeral = parseFloat($("#ttGeral").text());
+        orcamento.produtos = listaProdutos;
+        orcamento.servicos = listaServicos;
+        $.ajax({
+            url: 'http://172.18.24.130:3000/orcamento',
+            dataType: 'json',
+            type: 'post',
+            contentType: 'application/json',
+            data: JSON.stringify(orcamento),
+            processData: false,
+        });
     }
 
-    //// cidade
-    function gravaNoLocalStorageCidade(){
-        const listaEmJSON = JSON.stringify(listaCidades);
-        localStorage.setItem("lista", listaEmJSON);
-    }
-
-    function buscaDoLocalStorageCidade(){
-        const listaStorage = localStorage.getItem("lista");
-        listaCidades = JSON.parse(listaStorage) || [];
-    }
-
-    // profissao
-    function gravaNoLocalStorageProfissao(){
-        const listaEmJSON = JSON.stringify(listaProfissoes);
-        localStorage.setItem("lista", listaEmJSON);
-    }
-
-    function buscaDoLocalStorageProfissao(){
-        const listaStorage = localStorage.getItem("lista");
-        listaProfissoes = JSON.parse(listaStorage) || [];
-    }
-
-    /// botoes menu
-
-    $("#btn-cadastro-funcionario").click(function(){
-
-    });
-
-    $("#btn-cadastro-cidade").click(function(){
-
-<<<<<<< HEAD
-    });
-
-    $("#btn-cadastro-profissao").click(function(){
-
+    $("#envia").click(function(){
+        salvarOrcamento();
     });
 
 
 })();
-=======
-})();
->>>>>>> temp
