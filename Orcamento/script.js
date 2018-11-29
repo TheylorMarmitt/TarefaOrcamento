@@ -2,7 +2,7 @@
 
     var listaProdutos = [];
     var listaServicos = [];
-
+ 
     // salva produtos
     function salvarProdutos(){
         var produto = {};
