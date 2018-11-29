@@ -9,8 +9,8 @@
 }
 
 nav{
-    height: 900px;
-    width: 23%;
+    height: 600px;
+    width: 200px;
     float: left;
     background-color: #eee;
     margin-right: 20px;
@@ -20,9 +20,11 @@ nav ul li{
     display: inline;
     padding: 15px 10px;
     color: #fff;
+
 }
 
 nav ul li button{
     height: 40px;
     width: 100px;
+    margin-top: 30px;
 }
