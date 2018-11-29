@@ -23,8 +23,15 @@ nav ul li{
 
 }
 
+<<<<<<< HEAD
 nav ul li button{
     height: 40px;
     width: 100px;
     margin-top: 30px;
 }
+=======
+input{
+    width: 150px;
+    margin-bottom: 5px;
+} 
+>>>>>>> temp

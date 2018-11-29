@@ -1,6 +1,7 @@
 
 (function() {
 
+<<<<<<< HEAD
     var listaFuncionarios = [];
     var listaCidades = [];
     var listaProfissoes = [];
@@ -14,6 +15,19 @@
         funcionario.nascimento = $("#data-funcionario").val();
         funcionario.cidade = $("#cidade-funcionario").val();
         funcionario.salario = $("#salario-funcionario").val();
+=======
+    var listaProdutos = [];
+    var listaServicos = [];
+ 
+    // salva produtos
+    function salvarProdutos(){
+        var produto = {};
+
+        produto.nome = $("#nome-produto").val();
+        produto.quantidade = $("#qtd-produto").val();
+        produto.valor_unitario = $("#valor-unitario").val();
+        produto.valor_total = $("#valor-total").val();
+>>>>>>> temp
 
         let id = $("#id-funcionario").val();
 
@@ -22,6 +36,7 @@
             listaFuncionarios.push(funcionario);
         } else {
             let idNumber = parseInt(id);
+<<<<<<< HEAD
             let funcionarioExistente = findFuncionarioById(idNumber);
 
             if(funcionarioExistente){
@@ -30,6 +45,15 @@
                 funcionarioExistente.nascimento = funcionario.nascimento;
                 funcionarioExistente.cidade = funcionario.cidade;
                 funcionarioExistente.salario = funcionario.salario;
+=======
+            let produtoExistente = findProdutoById(idNumber);
+
+            if(produtoExistente){
+                produtoExistente.nome = produto.nome;
+                produtoExistente.quantidade = produto.quantidade;
+                produtoExistente.valor_unitario = produto.valor_unitario;
+                produtoExistente.valor_total = produto.valor_total;
+>>>>>>> temp
             }
         }
         gravaNoLocalStorageFuncionario()
@@ -85,8 +109,16 @@
 
             }
         }
+<<<<<<< HEAD
         gravaNoLocalStorageProfissao()
         renderizaProfissao();
+=======
+
+        renderizaServico();
+        limparServico();
+
+        calculaTotaisServico();
+>>>>>>> temp
         return false;
     }
 
@@ -115,11 +147,18 @@
 
             let tr = $('<tr>');
 
+<<<<<<< HEAD
             let tdNome = $('<td>').text(funcionario.nome);
             let tdCpf = $('<td>').text(funcionario.cpf);
             let tdNascimento = $('<td>').text(funcionario.nascimento);
             let tdCidade = $('<td>').text(funcionario.cidade);
             let tdSalario = $('<td>').text(funcionario.salario);
+=======
+            let tdNome = $('<td>').text(produto.nome);
+            let tdQuantidade = $('<td>').text(produto.quantidade);
+            let tdValor = $('<td>').text(produto.valor_unitario);
+            let tdValorTotal = $('<td>').text(produto.valor_total).addClass("valor");
+>>>>>>> temp
 
             let tdOpcoes = $('<td>');
 
@@ -194,6 +233,7 @@
 
             const profissao = listaProfissoes[i];
 
+<<<<<<< HEAD
             let tr = $('<tr>');
 
             let tdFuncao = $('<td>').text(profissao.funcao);
@@ -234,6 +274,14 @@
              $("#cidade-funcionario").val(funcionario.cidade);
              $("#salario-funcionario").val(funcionario.salario);
              $("#id-produto").val(funcionario.id);
+=======
+         if(produto){
+             $("#nome-produto").val(produto.nome);
+             $("#qtd-produto").val(produto.quantidade);
+             $("#valor-unitario").val(produto.valor_unitario);
+             $("#valor-total").val(produto.valor_total);
+             $("#id-produto").val(produto.id);
+>>>>>>> temp
          }else{
              alert('Não foi possível encontrar o funcionario');
          }
@@ -245,6 +293,7 @@
              .filter(function(value){
                  return value.id != id;
              });
+<<<<<<< HEAD
         gravaNoLocalStorageFuncionario()
         renderizaFuncionario();
     }
@@ -256,6 +305,20 @@
              $("#nome-cidade").val(cidade.nome);
              $("#estado").val(cidade.estado);
              $("#id-cidade").val(cidade.id);
+=======
+
+         renderizaProduto();
+        calculaTotais();
+        }
+
+    function editarServico(id){
+        let servico = findServicoById(id);
+
+         if(servico){
+             $("#descricao-servico").val(servico.descricao);
+             $("#valor-servico").val(servico.valor);
+             $("#id-servico").val(servico.id);
+>>>>>>> temp
          }else{
              alert('Não foi possível encontrar a cidade');
          }
@@ -267,6 +330,7 @@
             .filter(function(value){
                 return value.id != id;
             });
+<<<<<<< HEAD
         gravaNoLocalStorageCidade()
         renderizaCidade();
     }
@@ -291,6 +355,11 @@
         });
         gravaNoLocalStorageProfissao()
         renderizaProfissao();
+=======
+
+        renderizaServico();
+        calculaTotaisServico();
+>>>>>>> temp
     }
 
      function findFuncionarioById(id){
@@ -437,6 +506,7 @@
 
     $("#btn-cadastro-cidade").click(function(){
 
+<<<<<<< HEAD
     });
 
     $("#btn-cadastro-profissao").click(function(){
@@ -445,3 +515,6 @@
 
 
 })();
+=======
+})();
+>>>>>>> temp
